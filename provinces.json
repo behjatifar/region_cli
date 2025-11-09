@@ -1,0 +1,18 @@
+{
+"tehran": [
+{
+"Name": "markaz",
+"Address": "xyz",
+"Phone": "021-12345678",
+"RegisterDate": "2020-01-01",
+"EmployeeCount": 1
+},
+{
+"Name": "gharb",
+"Address": "xyz",
+"Phone": "021-12345678",
+"RegisterDate": "2020-01-01",
+"EmployeeCount": 1
+}
+]
+}

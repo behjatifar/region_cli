@@ -1,0 +1,6 @@
+// fix time format
+
+// fix add func 
+
+
+// fix first init 
