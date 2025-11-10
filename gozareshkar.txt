@@ -1,4 +1,4 @@
-// fix time format
+// fix time format  (fixed.) yy/month/dd hh:mm 
 
 // fix add func 
 

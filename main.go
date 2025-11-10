@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -26,17 +27,11 @@ type User struct {
 // global user
 var user User
 
-var IdStoreStructre int = len(provinces[user.region]) + 1
-
 func main() {
-	provinces["tehran"] = []Agency{
-		{Id: 1, Name: "markaz", Address: "xyz", Phone: "021-12345678", EmployeeCount: 1, RegisterDate: "2020-01-01"},
-		{Id: 2, Name: "gharb", Address: "xyz", Phone: "021-12345678", EmployeeCount: 1, RegisterDate: "2020-01-01"},
-	}
 	// region flag
 	region := flag.String("region", "", "choosing region")
 	flag.Parse()
-	command := flag.String("command", "get", "for set command")
+	command := flag.String("command", "", "for set command")
 	flag.Parse()
 
 	if len(*region) > 1 {
@@ -76,43 +71,51 @@ func runCommand(command string) {
 			fmt.Println("---------------------------------")
 			fmt.Println("list of agencies in your region")
 			for i := 0; i < len(provinces[user.region]); i++ {
-				fmt.Println(provinces[user.region][i].Name, "\t")
+				fmt.Println("ID:", provinces[user.region][i].Id, provinces[user.region][i].Name, "\t")
 			}
 			fmt.Println("---------------------------------")
 		}
 
 	case "get":
 		{
-			var id int = 1
+
+			strid := scanInput("Please Enter Agency ID also you can See Agency Names + ID in \"list\" command ")
+			id, err := strconv.Atoi(strid)
+			if err != nil {
+				fmt.Println("❌ Invalid ID. Please enter a number.")
+				return
+			}
+			// fmt.Println(provinces[user.region])
 			for _, v := range provinces[user.region] {
 				if id == v.Id {
 					fmt.Println(v.Name, v.Address, v.Phone, v.EmployeeCount)
 				}
 			}
 		}
+
 	case "edit":
 		{
 
 		}
 	case "add":
 		{
-			// name , address , phone , employeeCount | auto compeleted fields Id , RegisterDate
 			if len(user.region) > 0 {
-				// var name, address, phone string
-				// var employeeCount int scanInput()
-				fmt.Println("Enter Name")
-				// name = scanInput()
-				fmt.Println("Enter Address")
-				// address = scanInput()
-				fmt.Println(time.Now().String())
-				provinces[user.region] = []Agency{
-					{Id: IdStoreStructre,
+
+				// time format
+				t := time.Now()
+				var time string = fmt.Sprintf("%d-%02d-%02d %02d:%02d", t.Year(), t.Month(), t.Day(), t.Hour(), t.Minute())
+				var IdStoreStructre int = len(provinces[user.region]) + 1
+				provinces[user.region] = append(
+					provinces[user.region], Agency{
+						Id:            IdStoreStructre,
 						Name:          scanInput("enter the name"),
 						Address:       scanInput("enter the address"),
 						Phone:         scanInput("enter the phone-number"),
 						EmployeeCount: 5,
-						RegisterDate:  time.Now().String()},
-				}
+						RegisterDate:  time,
+					},
+				)
+				saveProvinceData()
 				fmt.Println(provinces[user.region])
 			} else {
 				fmt.Println("for adding Agency you have to select a region first")
@@ -137,7 +140,7 @@ func saveProvinceData() {
 	}
 }
 
-func loadProvinceData(provinces map[string][]Agency) (pData map[string][]Agency) {
+func loadProvinceData(provinces *map[string][]Agency) {
 	data, err := os.ReadFile("provinces.json")
 	if err != nil {
 		panic(err)
@@ -147,10 +150,12 @@ func loadProvinceData(provinces map[string][]Agency) (pData map[string][]Agency)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println()
-	return provinces
-}
+	fmt.Println("data loaded successfully✅")
 
+}
+func init() {
+	loadProvinceData(&provinces)
+}
 func setRegion(regName string) {
 	// scanner := bufio.NewScanner(os.Stdin)
 	// fmt.Println("please enter your region")
