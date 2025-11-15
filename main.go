@@ -42,7 +42,7 @@ func main() {
 
 		runCommand(*command)
 		scanner := bufio.NewScanner(os.Stdin)
-		fmt.Println("please enter another command")
+		fmt.Println("Please Enter Command (help: app commands)")
 		scanner.Scan()
 		*command = scanner.Text()
 	}
@@ -51,6 +51,24 @@ func runCommand(command string) {
 	switch command {
 	case "help":
 		{
+			// fmt.Println(`
+			// 	region  : set your region
+			// 	list    : list agencies in region
+			// 	get     : get agency by id
+			// 	edit    : edit agency info by id
+			// 	add     : add agency to region
+			// 	status  : see agency status (employeeCount & active agencies)
+			// 	exit    : exit the app
+			// 	`)
+
+			fmt.Println("\033[1;36mAvailable Commands:\033[0m")
+			fmt.Println("\033[1;33mregion\033[0m  : Set your current region.")
+			fmt.Println("\033[1;33mlist\033[0m    : Show all agencies in the selected region.")
+			fmt.Println("\033[1;33mget\033[0m     : Get a specific agency by its ID.")
+			fmt.Println("\033[1;33medit\033[0m    : Edit agency information using its ID.")
+			fmt.Println("\033[1;33madd\033[0m     : Add a new agency to the current region.")
+			fmt.Println("\033[1;33mstatus\033[0m  : View region status (employeeCount & active agencies).")
+			fmt.Println("\033[1;33mexit\033[0m    : Exit the application.")
 
 		}
 	case "region":

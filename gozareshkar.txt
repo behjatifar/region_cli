@@ -4,3 +4,19 @@
 
 
 // fix first init 
+
+
+
+next version i want to change data structure 
+
+map[string]map[int]Agency
+
+var provinces = map[string]map[int]Agency{
+    "tehran": {
+        12: {Id: 12, Name: "XYZ"},
+        18: {Id: 18, Name: "ABC"},
+    },
+}
+
+
+// 1 (report bug) --> in null region user should not be able to use list , add , get , status cmds
