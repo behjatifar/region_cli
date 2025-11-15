@@ -110,8 +110,56 @@ func runCommand(command string) {
 				fmt.Println("❌ Invalid ID. Please enter a number.")
 				return
 			}
+
 			agency := getAgencyById(id)
 			fmt.Println(agency)
+			if agency != nil {
+				for i := range provinces[user.region] {
+					if provinces[user.region][i].Name == agency.Name {
+						var (
+							inputName    string
+							inputAddress string
+							inputPhone   string
+						)
+
+						inputName = scanInput("enter the name")
+						inputAddress = scanInput("enter the address")
+						inputPhone = scanInput("enter the phone-number")
+						strid := scanInput("enter employeeCount")
+						inputEmployeeCount, err := strconv.Atoi(strid)
+						// check and validate EmployeeCount
+						if err != nil {
+							fmt.Println("Invalid INPUT employee count must be an Integer")
+						}
+						provinces[user.region][i].Name = inputName
+						provinces[user.region][i].Address = inputAddress
+						provinces[user.region][i].Phone = inputPhone
+						provinces[user.region][i].EmployeeCount = inputEmployeeCount
+						provinces[user.region][i].RegisterDate = getTime()
+						fmt.Println("before edit", agency)
+						fmt.Println("After edit", provinces[user.region][i])
+
+						askSave := scanInput("Do you want to save edited data? 1:Yes 2:No")
+						switch askSave {
+						case "1":
+							saveProvinceData()
+							fmt.Println("New Edited Data Saved")
+						case "2":
+
+							fmt.Println("Changes are not saved")
+							provinces[user.region][i] = *agency
+
+						default:
+							fmt.Println("Enter a valid Input Option")
+						}
+						break
+					}
+					fmt.Println("all", provinces[user.region])
+					fmt.Println("edited", agency)
+				}
+			} else {
+				fmt.Println("Wrong Input ID must be valid id See List Command for agency ID's ")
+			}
 		}
 	case "add":
 		{
@@ -228,4 +276,11 @@ func getAgencyById(id int) (agency *Agency) {
 		return agency
 	}
 	return nil
+}
+
+func getTime() (datetime string) {
+	// time format
+	t := time.Now()
+	datetime = fmt.Sprintf("%d-%02d-%02d %02d:%02d", t.Year(), t.Month(), t.Day(), t.Hour(), t.Minute())
+	return datetime
 }

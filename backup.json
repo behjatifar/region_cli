@@ -1,0 +1,96 @@
+{
+"neyshabur": [
+{
+"Id": 1,
+"Name": "Central Neyshabur",
+"Address": "میدان امام خمینی، ابتدای خیابان فیض",
+"Phone": "051-4223-8899",
+"RegisterDate": "2020-12-03",
+"EmployeeCount": 3
+},
+{
+"Id": 2,
+"Name": "Khayyam Branch",
+"Address": "خیابان خیام شمالی، روبه‌روی بانک ملی",
+"Phone": "051-4225-1144",
+"RegisterDate": "2022-04-14",
+"EmployeeCount": 4
+},
+{
+"Id": 3,
+"Name": "Ferdowsi Store",
+"Address": "خیابان فردوسی، نبش کوچه بهار",
+"Phone": "051-4228-3355",
+"RegisterDate": "2023-09-06",
+"EmployeeCount": 2
+}
+],
+"shiraz": [
+{
+"Id": 1,
+"Name": "Vakil Branch",
+"Address": "خیابان کریم‌خان زند، روبه‌روی بازار وکیل",
+"Phone": "071-3224-3355",
+"RegisterDate": "2021-09-10",
+"EmployeeCount": 4
+},
+{
+"Id": 2,
+"Name": "MaaliAbad",
+"Address": "خیابان معالی‌آباد، نبش کوچه 14",
+"Phone": "071-3622-1144",
+"RegisterDate": "2022-11-18",
+"EmployeeCount": 5
+},
+{
+"Id": 3,
+"Name": "Zand Branch",
+"Address": "بلوار زند، روبه‌روی پارک آزادی",
+"Phone": "071-3265-7788",
+"RegisterDate": "2023-05-27",
+"EmployeeCount": 3
+},
+{
+"Id": 4,
+"Name": "heli",
+"Address": "shiraz-darvazehghoran",
+"Phone": "061-6234-5423",
+"RegisterDate": "2025-11-15 12:01",
+"EmployeeCount": 6
+}
+],
+"tehran": [
+{
+"Id": 1,
+"Name": "Markaz Tehran",
+"Address": "خیابان آزادی، نرسیده به میدان انقلاب",
+"Phone": "021-6644-2233",
+"RegisterDate": "2021-03-15",
+"EmployeeCount": 6
+},
+{
+"Id": 2,
+"Name": "Pasdaran Branch",
+"Address": "خیابان پاسداران، بعد از چهارراه نیستان",
+"Phone": "021-2288-4567",
+"RegisterDate": "2022-07-09",
+"EmployeeCount": 4
+},
+{
+"Id": 3,
+"Name": "Tehran Mall",
+"Address": "مرکز خرید کوروش، طبقه سوم، واحد 12",
+"Phone": "021-4420-7890",
+"RegisterDate": "2023-02-21",
+"EmployeeCount": 5
+},
+{
+"Id": 4,
+"Name": "Vanak Branch",
+"Address": "میدان ونک، خیابان ملاصدرا، پلاک 45",
+"Phone": "021-8867-1122",
+"RegisterDate": "2024-01-11",
+"EmployeeCount": 3
+}
+]
+}
