@@ -86,16 +86,32 @@ func runCommand(command string) {
 				return
 			}
 			// fmt.Println(provinces[user.region])
-			for _, v := range provinces[user.region] {
-				if id == v.Id {
-					fmt.Println(v.Name, v.Address, v.Phone, v.EmployeeCount)
+			var getById *Agency
+			if id > len(provinces[user.region]) {
+				fmt.Println("❌ Invalid ID. Please enter a number.")
+			} else {
+				for _, v := range provinces[user.region] {
+					if id == v.Id {
+						// fmt.Println(v.Name, v.Address, v.Phone, v.EmployeeCount)
+						// getById = &Agency{Id: v.Id, Name: v.Name, Address: v.Address, Phone: v.Phone, EmployeeCount: v.EmployeeCount, RegisterDate: v.RegisterDate}
+						getById = &v
+
+					}
 				}
+				fmt.Println(getById)
 			}
 		}
 
 	case "edit":
 		{
-
+			strid := scanInput("enter id")
+			id, err := strconv.Atoi(strid)
+			if err != nil {
+				fmt.Println("❌ Invalid ID. Please enter a number.")
+				return
+			}
+			agency := getAgencyById(id)
+			fmt.Println(agency)
 		}
 	case "add":
 		{
@@ -105,16 +121,32 @@ func runCommand(command string) {
 				t := time.Now()
 				var time string = fmt.Sprintf("%d-%02d-%02d %02d:%02d", t.Year(), t.Month(), t.Day(), t.Hour(), t.Minute())
 				var IdStoreStructre int = len(provinces[user.region]) + 1
+				var (
+					inputName    string
+					inputAddress string
+					inputPhone   string
+				)
+
+				inputName = scanInput("enter the name")
+				inputAddress = scanInput("enter the address")
+				inputPhone = scanInput("enter the phone-number")
+				strid := scanInput("enter employeeCount")
+				inputEmployeeCount, err := strconv.Atoi(strid)
+				// check and validate EmployeeCount
+				if err != nil {
+					fmt.Println("Invalid INPUT employee count must be an Integer")
+				}
 				provinces[user.region] = append(
 					provinces[user.region], Agency{
 						Id:            IdStoreStructre,
-						Name:          scanInput("enter the name"),
-						Address:       scanInput("enter the address"),
-						Phone:         scanInput("enter the phone-number"),
-						EmployeeCount: 5,
+						Name:          inputName,
+						Address:       inputAddress,
+						Phone:         inputPhone,
+						EmployeeCount: inputEmployeeCount,
 						RegisterDate:  time,
 					},
 				)
+
 				saveProvinceData()
 				fmt.Println(provinces[user.region])
 			} else {
@@ -179,4 +211,21 @@ func scanInput(scanTxt string) (result string) {
 	result = scanner.Text()
 
 	return result
+}
+
+func getAgencyById(id int) (agency *Agency) {
+	if id > len(provinces[user.region]) {
+		fmt.Println("❌ Invalid ID. Please enter a number.")
+	} else {
+		for _, v := range provinces[user.region] {
+			if id == v.Id {
+				// fmt.Println(v.Name, v.Address, v.Phone, v.EmployeeCount)
+				// getById = &Agency{Id: v.Id, Name: v.Name, Address: v.Address, Phone: v.Phone, EmployeeCount: v.EmployeeCount, RegisterDate: v.RegisterDate}
+				agency = &v
+
+			}
+		}
+		return agency
+	}
+	return nil
 }
