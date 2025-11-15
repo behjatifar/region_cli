@@ -165,9 +165,6 @@ func runCommand(command string) {
 		{
 			if len(user.region) > 0 {
 
-				// time format
-				t := time.Now()
-				var time string = fmt.Sprintf("%d-%02d-%02d %02d:%02d", t.Year(), t.Month(), t.Day(), t.Hour(), t.Minute())
 				var IdStoreStructre int = len(provinces[user.region]) + 1
 				var (
 					inputName    string
@@ -191,7 +188,7 @@ func runCommand(command string) {
 						Address:       inputAddress,
 						Phone:         inputPhone,
 						EmployeeCount: inputEmployeeCount,
-						RegisterDate:  time,
+						RegisterDate:  getTime(),
 					},
 				)
 
@@ -200,6 +197,16 @@ func runCommand(command string) {
 			} else {
 				fmt.Println("for adding Agency you have to select a region first")
 			}
+		}
+	case "status":
+		{
+			var regionEmployeeCount int
+			for i := 0; i < len(provinces[user.region]); i++ {
+
+				regionEmployeeCount += provinces[user.region][i].EmployeeCount
+			}
+
+			fmt.Printf("Current Region Status | Active Agencies : %d  regionEmployee Count: %d \n ", len(provinces[user.region]), regionEmployeeCount)
 		}
 	case "exit":
 		{
